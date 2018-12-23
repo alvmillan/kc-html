@@ -24,7 +24,6 @@ export class FormContact {
 
     leerContact(oE) {
         oE.preventDefault();
-        console.log("test");
         if (this.validar()) {
             this.guardarDatos()
         }
@@ -40,16 +39,9 @@ export class FormContact {
             otherSelection: this.oOtherSelectionInput.value
         }
 
-        let msg = document.querySelector('#succ_post');  
-        console.log(msg);
+        let msg = document.querySelector('#succ_post');
         msg.classList.remove('hidden');
         setTimeout(() => msg.classList.add('hidden'), 3000);
-    }
-
-    definirValidaciones() {
-        // this.oInputName.setCustomValidity('El nombre es obligatorio')
-        console.dir(this.oInputName.validity)
-        console.dir(this.oInputEmail.validity)
     }
 
     shouldOtherSelectionInputBeVisible(oE) {

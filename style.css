@@ -5,8 +5,6 @@
 :root {
     --color-texto: rgb(0, 0, 0);
     --color-fondo: white; 
-    --color-autores: darkgrey;
-    --color-activo: rgb(58, 113, 201);
     --color-error: red;
 }
 
@@ -55,6 +53,11 @@ article p {
     font-family: 'Lora', serif;
 }
 
+.video {
+    width: 100%;
+    height: 600px;
+}
+
 /*
 ** Elementos iniciales: Header y Nav **
 */
@@ -70,13 +73,6 @@ article p {
     left: 20%;
     /* width: 30%; */
 }
-
-/* Menus 
-    .top-wrapper
-        .menu-icon
-        .menu-top
-    .menu-bottom
-*/
 
 nav a {
     display: block;
@@ -135,7 +131,7 @@ section header {
 }
 
 section#home header {
-    background-image: url(./assets/text.jpg);
+    background-image: url(./assets/bg/bg-main.jpg);
 }
 
 section#whoami header {    
@@ -151,11 +147,11 @@ section#experience header {
 }
 
 section#about header{
-    background-image: url(./assets/bg/bg-about-me.jpg)
+    background-image: url(./assets/bg/bg-about-me.jpg);
 }
 
 section#contact header{
-    background-image: url(./assets/contact-bg.jpg)
+    background-image: url(./assets/bg-contact.jpg);
 }
 
 section .title-wrapper {

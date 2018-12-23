@@ -16,8 +16,6 @@ import { Menu } from './menu.js'
 
 export class Index {
     constructor() {
-        // elementos del DOM       
-        this.oInputName = document.querySelector('#nombre');
         this.oMenus = new Menu();
         this.oFormContact = new FormContact();
     }
