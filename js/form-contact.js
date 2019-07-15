@@ -1,74 +1,92 @@
 export class FormContact {
     constructor() {
 
-        this.oFormContact =  document.querySelector('#contact-form')
-        this.oInputName = document.querySelector('#nombre')
+        this.oFormContact =  document.querySelector('#contact')
+        this.oInputName = document.querySelector('#name')
         this.oInputEmail = document.querySelector('#email')
         this.oInputPhone = document.querySelector('#phone')
         this.oTextMessage = document.querySelector('#message')
+        this.oCheckCondiciones = document.querySelector('#condiciones')
+        this.oInputOtros = document.querySelector('#selection-otro')
         this.oSelectSeleccion = document.querySelector('#selection')
-        this.oOtherSelectionInput = document.querySelector('#otherSelection')
 
         this.oData = {
             name: '',
             email: '',
             phone: '',
-            message: '',            
-            seleccion: '',
-            otherSelection: ''
-        };
+            message: '',
+            condiciones: '',
+            opciones: '',
+            seleccion: ''
+        }
 
-        this.oFormContact.addEventListener('submit', this.leerContact.bind(this));
-        this.oSelectSeleccion.addEventListener('change', this.shouldOtherSelectionInputBeVisible.bind(this));
+        this.oFormContact.addEventListener('submit', this.leerContact.bind(this)) 
+        this.oSelectSeleccion.addEventListener('change', this.watchSelect.bind(this))
+        this.definirValidaciones()
     }
 
     leerContact(oE) {
         oE.preventDefault();
-        if (this.validar()) {
-            this.guardarDatos()
-        }
+        this.guardarDatos()
     }
 
     guardarDatos() {
         this.oData = {
             name:  this.oInputName.value,
-            email: this.oInputEmail.value ,
+            email: this.oInputEmail.value,
             phone: this.oInputPhone.value,
             message: this.oTextMessage.value,
-            seleccion: this.oSelectSeleccion.options[this.oSelectSeleccion.selectedIndex].value,
-            otherSelection: this.oOtherSelectionInput.value
+            seleccion: this.isOtrosSelected() ? this.oInputOtros.value :
+                this.oSelectSeleccion.options[this.oSelectSeleccion.selectedIndex].value,
         }
 
-        let msg = document.querySelector('#succ_post');
-        msg.classList.remove('hidden');
-        setTimeout(() => msg.classList.add('hidden'), 3000);
+        console.dir(this.oData)
     }
 
-    shouldOtherSelectionInputBeVisible(oE) {
-        oE.preventDefault();
-        if ( this.oSelectSeleccion.options[this.oSelectSeleccion.selectedIndex].value === 'other') {            
-            this.oOtherSelectionInput.parentElement.classList.remove('form-toggle');
+    isOtrosSelected() {
+        return this.oSelectSeleccion.options[this.oSelectSeleccion.selectedIndex].value === "otros";
+    }
+
+    watchSelect() {
+        if (this.isOtrosSelected()) {
+            this.oInputOtros.parentElement.classList.remove('oculto')
+            console.log( this.oInputOtros.parentElement)
         } else {
-            this.oOtherSelectionInput.parentElement.classList.add('form-toggle');
+            this.oInputOtros.parentElement.classList.add('oculto')
         }
     }
 
-    validar() {
-        if (this.validateTextArea()) {
-            document.querySelector('#err_message').classList.add('hidden');
-            return true;
-        } else {
-            document.querySelector('#err_message').classList.remove('hidden');
-        }
+    definirValidaciones() {
+        this.validaNombre()
+        this.oInputName.addEventListener('input', this.validaNombre.bind(this) )
+
+        this.validaTexto()
+        this.oTextMessage.addEventListener('input', this.validaTexto.bind(this) )
+
     }
 
-    validateTextArea() {
-        const maxWords = 150;
-        let getNumberOfWords = this.oTextMessage.value.split(' ').length;
-        if (getNumberOfWords > maxWords ) {
-            return false;
-        } else {
-            return true;
-        }
+    validaNombre() {
+        let msg = ''
+        this.oInputName.setCustomValidity(msg)
+        if(!this.oInputName.checkValidity()){
+            msg = 'Es necesario indicar el nombre'
+        } 
+        this.oInputName.setCustomValidity(msg)
+        console.log(msg)
     }
+
+    validaTexto() {
+        let msg = ''
+        this.oTextMessage.setCustomValidity(msg)
+        console.log("Validando texto", this.oTextMessage.value )
+        if (!this.oTextMessage.value) {
+            msg = 'Es necesario incluir algún texto en el mensaje'
+        } else if (this.oTextMessage.value.split(' ').length > 150) {
+            msg = 'El texto no debe sobrepasar 50 palabras'
+        } 
+        this.oTextMessage.setCustomValidity(msg)
+        console.log('Validando texto', msg)
+        console.log(this.oTextMessage.value.length)
+    }
+
 }

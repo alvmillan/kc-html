@@ -15,7 +15,7 @@ export class Main {
         this.page = window.location.pathname
         this.page = this.page.substr(this.page.lastIndexOf('/')+1,this.page.length)
 
-        if (this.page === 'index.html') {
+        if (this.page === '' || this.page === 'index.html') {
             new Index()
         }
     }
