@@ -105,7 +105,7 @@ export class Menu {
             (item) => {
                 let cumulative =  this.cumulativeOffset(item);
                 this.oOffsets['#'+item.id] = cumulative;
-                // this.oOffsets['#'+item.id] = item.offsetTop
+                this.oOffsets['#'+item.id] = item.offsetTop
             }
         )
     
@@ -118,7 +118,6 @@ export class Menu {
             }
         )
         this.aOffsets[0] = 0
-        console.log(this.aOffsets)
     }
 
     cumulativeOffset (element) {

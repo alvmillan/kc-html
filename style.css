@@ -134,7 +134,7 @@ section#home header {
     background-image: url(./assets/bg/bg-main.jpg);
 }
 
-section#whoami header {    
+section#quien-soy header {    
     background-image: url(./assets/bg/bg-sobre-mii.jpg);
 }
 
@@ -246,13 +246,13 @@ section#home article>p{
     margin-top: 1rem;
 }
 
-section#home footer {
+section#home h3 {
    font-size: 1,12rem;
    font-style: italic;
    padding-bottom: 1rem; 
 }
 
-section#home footer .autor {
+section#home h3 .autor {
     color: var(--color-autores);
     font-weight: 900;
 }
@@ -308,7 +308,12 @@ section#contacto li select {
 
 }
 
-
+.social {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-autores);
+    padding-top: 3rem;
+    text-align: center;
+}
 
 .oculto {
     display: none;
